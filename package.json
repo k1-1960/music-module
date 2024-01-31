@@ -1,0 +1,39 @@
+{
+  "name": "@k11960/music-module",
+  "version": "0.0.0-indev",
+  "description": "Play music on discord with your discord bot.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "ts:test": "nodemon --ext ts,js --exec ts-node test/test.ts",
+    "js:test": "nodemon --ext ts,js --exec node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k1-1960/music-module.git"
+  },
+  "keywords": [
+    "music",
+    "discord",
+    "bot"
+  ],
+  "author": "K1-1960",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k1-1960/music-module/issues"
+  },
+  "homepage": "https://github.com/k1-1960/music-module#readme",
+  "dependencies": {
+    "@discordjs/voice": "^0.16.1",
+    "puppeteer": "^21.9.0",
+    "ytdl-core": "^4.11.5"
+  }
+}
