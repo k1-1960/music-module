@@ -22,6 +22,7 @@ const wait = promisify(setTimeout);
 export class MusicSubscription extends EventEmitter {
   public readonly voiceConnection: VoiceConnection;
   public readonly audioPlayer: AudioPlayer;
+  public currentTrack: Track | null = null;
   public queue: Track[];
   public queueLock = false;
   public readyLock = false;
@@ -156,6 +157,7 @@ export class MusicSubscription extends EventEmitter {
   public stop() {
     this.queueLock = true;
     this.queue = [];
+    this.currentTrack = null;
     this.audioPlayer.stop(true);
   }
 
@@ -181,6 +183,7 @@ export class MusicSubscription extends EventEmitter {
       const resource = nextTrack.audioResource as AudioResource;
       this.audioPlayer.play(resource);
       this.queueLock = false;
+      this.currentTrack = nextTrack;
     } catch (error) {
       // If an error occurred, try the next item of the queue instead
       this.emit(
