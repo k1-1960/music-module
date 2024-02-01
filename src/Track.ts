@@ -6,6 +6,11 @@ import {
 import puppeteer from 'puppeteer';
 import ytdl, { thumbnail } from 'ytdl-core';
 import { durationWrapper, WrappedDuration } from './functions/durationWrapper';
+const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/;
+
+export function isURL(text: string) {
+  return urlRegex.test(text);
+}
 
 export interface TrackMetadata {
   reference: any;
@@ -40,7 +45,7 @@ export class Track {
    */
   static async create(query: string, reference?: any): Promise<Track> {
     const track = new Track(query, reference);
-    await track.fetchURL();
+    if (!isURL(query)) await track.fetchURL();
     track.audioResource = await track.createAudioResource(track.url as string);
     return track;
   }
